@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { config } from "./config/env.config.js";
 
+import authRoutes from "./routes/auth/auth.route.js";
+
 const app = express();
 
 // CORS CONFIG
@@ -31,6 +33,9 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("Server health is okay. ✅");
 });
+
+// ROUTES
+app.use("/api/auth", authRoutes);
 
 // ERROR MIDDLEWARE
 app.use(errorMiddleware);
