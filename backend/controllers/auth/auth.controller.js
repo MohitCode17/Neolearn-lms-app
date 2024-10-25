@@ -76,3 +76,22 @@ export const handleLogin = catchAsyncError(async (req, res, next) => {
     },
   });
 });
+
+// LOGOUT CONTROLLER
+export const handleLogout = catchAsyncError(async (req, res, next) => {
+  res.clearCookie("token").json({
+    success: true,
+    message: "Logout succesfully.",
+  });
+});
+
+// CHECK AUTH CONTROLLER
+export const handleCheckAuth = catchAsyncError(async (req, res, next) => {
+  const user = req.user;
+
+  res.status(200).json({
+    success: true,
+    message: "Authenticated User!",
+    user,
+  });
+});
