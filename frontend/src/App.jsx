@@ -1,11 +1,18 @@
 import React from "react";
-import { Button } from "./components/ui/button";
+import { Routes, Route } from "react-router-dom";
+import AuthLayout from "./components/auth/layout";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 
 const App = () => {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold underline mb-2">LMS Mern Stack</h1>
-      <Button>Let's Create</Button>
+    <div>
+      <Routes>
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+      </Routes>
     </div>
   );
 };
