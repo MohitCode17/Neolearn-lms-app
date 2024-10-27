@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -13,6 +15,8 @@ const App = () => {
           <Route path="register" element={<Register />} />
         </Route>
       </Routes>
+      {/* TOAST NOTIFICATION */}
+      <ToastContainer theme="dark" position="bottom-right" />
     </div>
   );
 };
