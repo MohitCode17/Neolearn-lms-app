@@ -8,11 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/auth-slice";
 import ProtectedRoute from "./components/protected-route";
-import InstructorDashboard from "./pages/instructor/Dashboard";
 import AddCourses from "./pages/instructor/AddCourses";
 import StudentHomeView from "./pages/student/StudentHomeView";
 import StudentViewLayout from "./components/student/layout";
 import NotFound from "./pages/NotFound";
+import InstructorDashboardPage from "./pages/instructor/Dashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const App = () => {
           path="/instructor"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated} user={user}>
-              <InstructorDashboard />
+              <InstructorDashboardPage />
             </ProtectedRoute>
           }
         >
