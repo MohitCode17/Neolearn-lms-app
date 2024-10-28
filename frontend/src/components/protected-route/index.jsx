@@ -16,7 +16,7 @@ const ProtectedRoute = ({ isAuthenticated, user, children }) => {
     (location.pathname.includes("instructor") ||
       location.pathname.includes("/auth"))
   ) {
-    return <Navigate to={"/home"} />;
+    return <Navigate to={"/"} />;
   }
 
   // COND-3 IF USER IS AUTHENTICATED, BUT TRY TO ACCESS AUTH PAGE && IF USER IS AUTHENTICATED, ROLE OF USER IS INSTRUCTOR BUT TRY TO ACCESS PAGE OF OTHER THAN INSTRUCTOR PAGE

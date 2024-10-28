@@ -7,6 +7,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/auth-slice";
+import ProtectedRoute from "./components/protected-route";
+import InstructorDashboard from "./pages/instructor/Dashboard";
+import AddCourses from "./pages/instructor/AddCourses";
+import StudentHomeView from "./pages/student/StudentHomeView";
+import StudentViewLayout from "./components/student/layout";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,10 +28,45 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/auth" element={<AuthLayout />}>
+        {/* AUTH ROUTE */}
+        <Route
+          path="/auth"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} user={user}>
+              <AuthLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+
+        {/* INSTRUCTOR */}
+        <Route
+          path="/instructor"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} user={user}>
+              <InstructorDashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="create-new-course" element={<AddCourses />} />
+        </Route>
+
+        {/* STUDENT */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} user={user}>
+              <StudentViewLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="" element={<StudentHomeView />} />
+        </Route>
+
+        {/* NOT FOUND */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {/* TOAST NOTIFICATION */}
       <ToastContainer theme="dark" position="bottom-right" />
