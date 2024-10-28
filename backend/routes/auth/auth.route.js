@@ -19,6 +19,6 @@ router.post("/login", handleLogin);
 router.post("/logout", handleLogout);
 
 // CHECK AUTH USER ROUTE
-router.post("/check-auth", checkAuthenticated, handleCheckAuth);
+router.get("/check-auth", checkAuthenticated, handleCheckAuth);
 
 export default router;
