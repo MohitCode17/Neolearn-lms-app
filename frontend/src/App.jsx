@@ -45,14 +45,23 @@ const App = () => {
         <Route
           path="/instructor"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated} user={user}>
-              <InstructorDashboardPage />
-            </ProtectedRoute>
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              user={user}
+              children={<InstructorDashboardPage />}
+            />
           }
-        >
-          <Route path="create-new-course" element={<AddCourses />} />
-        </Route>
-
+        />
+        <Route
+          path="/instructor/create-new-course"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              user={user}
+              children={<AddCourses />}
+            />
+          }
+        />
         {/* STUDENT */}
         <Route
           path="/"

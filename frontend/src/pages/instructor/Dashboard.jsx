@@ -1,5 +1,5 @@
 import InstructorDashboard from "@/components/instructor/dashboard";
-import InstructorCourses from "@/components/instructor/instructor-courses";
+import InstructorCourses from "@/components/instructor/courses/instructor-courses";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { BarChart, Book, LogOut } from "lucide-react";
@@ -68,7 +68,7 @@ const InstructorDashboardPage = () => {
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             {menuItems.map((menuItem) => (
-              <TabsContent value={menuItem.value}>
+              <TabsContent key={menuItem.value} value={menuItem.value}>
                 {menuItem.component !== null ? menuItem.component : null}
               </TabsContent>
             ))}
