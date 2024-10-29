@@ -6,6 +6,7 @@ import { config } from "./config/env.config.js";
 import fileUpload from "express-fileupload";
 
 import authRoutes from "./routes/auth/auth.route.js";
+import mediaRoutes from "./routes/instructor/media.route.js";
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 
 // ROUTES
 app.use("/api/auth", authRoutes);
+app.use("/api/media", mediaRoutes);
 
 // ERROR MIDDLEWARE
 app.use(errorMiddleware);
