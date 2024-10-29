@@ -2,6 +2,14 @@ import React from "react";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Textarea } from "../ui/textarea";
 
 const CommonForm = ({
   formControls,
@@ -14,7 +22,7 @@ const CommonForm = ({
   const renderInputsByComponentType = (getControlItem) => {
     let element = null;
     let value = formData[getControlItem.name] || "";
-    
+
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -23,6 +31,48 @@ const CommonForm = ({
             placeholder={getControlItem.placeholder}
             id={getControlItem.name}
             type={getControlItem.type}
+            value={value}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: e.target.value,
+              })
+            }
+          />
+        );
+        break;
+
+      case "select":
+        element = (
+          <Select
+            value={value}
+            onValueChange={(selectedValue) =>
+              setFormData({ ...formData, [getControlItem.name]: selectedValue })
+            }
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={getControlItem.label} />
+            </SelectTrigger>
+
+            <SelectContent>
+              {getControlItem.options && getControlItem.options.length > 0
+                ? getControlItem.options.map((optionItem) => (
+                    <SelectItem key={optionItem.id} value={optionItem.id}>
+                      {optionItem.label}
+                    </SelectItem>
+                  ))
+                : null}
+            </SelectContent>
+          </Select>
+        );
+        break;
+
+      case "textarea":
+        element = (
+          <Textarea
+            id={getControlItem.name}
+            name={getControlItem.name}
+            placeholder={getControlItem.placeholder}
             value={value}
             onChange={(e) =>
               setFormData({
@@ -56,7 +106,6 @@ const CommonForm = ({
             <Label className="mb-1">{controlItem.label}</Label>
             {/* FUNCTION TO RENDER INPUT BY COMPONENT TYPE */}
             {renderInputsByComponentType(controlItem)}
-            {}
           </div>
         ))}
         <Button className="mt-4 w-full" type="submit" disabled={isBtnDisabled}>
