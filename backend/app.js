@@ -3,6 +3,7 @@ import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { config } from "./config/env.config.js";
+import fileUpload from "express-fileupload";
 
 import authRoutes from "./routes/auth/auth.route.js";
 
@@ -28,6 +29,14 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// FILE UPLOAD MIDDLEWARE
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 // SERVER HEALTH ROUTE
 app.get("/", (req, res) => {
